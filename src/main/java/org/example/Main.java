@@ -4,11 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import java.util.Random;
 
 
 @SpringBootApplication
-@EnableTransactionManagement(order = 1)
 public class Main implements CommandLineRunner {
 
     public static void main(String[] args) {
@@ -22,7 +22,8 @@ public class Main implements CommandLineRunner {
     public void run(String... args) throws Exception {
         var key = System.in.read();
         while (key != -1) {
-            service.save();
+            var uid = Integer.toString(new Random().nextInt());
+            service.save(uid);
             key = System.in.read();
         }
     }

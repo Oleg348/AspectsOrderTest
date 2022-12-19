@@ -1,8 +1,10 @@
 package org.example;
 
 import lombok.RequiredArgsConstructor;
+import org.example.async.WithAsyncResult;
 import org.example.db.MyEntity;
 import org.example.db.Repo;
+import org.example.lock.GlobalLock;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,8 +18,10 @@ public class MyService {
     private final AtomicBoolean needToThrow = new AtomicBoolean();
 
     @Async
+    @WithAsyncResult(serviceRef = "asyncActionResultHolder")
+    @GlobalLock(lockerName = "save_locker", serviceRef = "globalLockService")
     @Transactional
-    public void save() {
+    public void save(String uid) {
         if (needToThrow.get()) {
             needToThrow.set(false);
             throw new RuntimeException("error");
