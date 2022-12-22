@@ -16,4 +16,6 @@ public @interface GlobalLock {
     String lockerName() default DEFAULT_LOCK_NAME;
 
     String serviceRef() default DEFAULT_LOCKER_SERVICE;
+
+    int order();
 }

@@ -1,10 +1,9 @@
 package org.example;
 
 import org.example.async.AsyncActionResultHolder;
-import org.example.async.AsyncActionResultHolderAspect;
 import org.example.db.Repo;
-import org.example.lock.GlobalLockAspect;
 import org.example.lock.GlobalLockService;
+import org.example.myaop.ProxyCreatorsPostProcessor;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -31,24 +30,29 @@ public class Config implements InitializingBean {
         return new GlobalLockService();
     }
 
-    @Bean
-    public GlobalLockAspect globalLockAspect() {
-        return new GlobalLockAspect();
-    }
+//    @Bean
+//    public GlobalLockAspect globalLockAspect() {
+//        return new GlobalLockAspect();
+//    }
 
     @Bean
     public AsyncActionResultHolder asyncActionResultHolder() {
         return new AsyncActionResultHolder();
     }
 
-    @Bean
-    public AsyncActionResultHolderAspect asyncActionResultHolderAspect() {
-        return new AsyncActionResultHolderAspect();
-    }
+//    @Bean
+//    public AsyncActionResultHolderAspect asyncActionResultHolderAspect() {
+//        return new AsyncActionResultHolderAspect();
+//    }
 
     @Bean
     public MyService myService(Repo repo) {
         return new MyService(repo);
+    }
+
+    @Bean
+    public ProxyCreatorsPostProcessor proxyCreatorsPostProcessor() {
+        return new ProxyCreatorsPostProcessor();
     }
 
     @Autowired

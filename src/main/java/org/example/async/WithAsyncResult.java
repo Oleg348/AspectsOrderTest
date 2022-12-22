@@ -13,4 +13,6 @@ public @interface WithAsyncResult {
     String DEFAULT_SERVICE = "";
 
     String serviceRef() default DEFAULT_SERVICE;
+
+    int order();
 }

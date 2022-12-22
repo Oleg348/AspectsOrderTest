@@ -16,7 +16,7 @@ public class Main implements CommandLineRunner {
     }
 
     @Autowired
-    protected MyService service;
+    protected IMyService service;
 
     @Override
     public void run(String... args) throws Exception {
